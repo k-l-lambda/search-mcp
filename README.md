@@ -1,76 +1,76 @@
 # Search MCP Server
 
-一个基于 Model Context Protocol (MCP) 的网络搜索服务器，支持多个搜索引擎并具有自动降级功能。
+A web search server based on Model Context Protocol (MCP) that supports multiple search engines with automatic fallback functionality.
 
-## ✨ 功能特性
+## ✨ Features
 
-- 🔍 **多搜索引擎支持**
-  - SerpAPI (推荐 - 需要API密钥)
-  - Baidu (百度)
+- 🔍 **Multiple Search Engine Support**
+  - SerpAPI (recommended - requires API key)
+  - Baidu
   - Google
   - DuckDuckGo
   - SearXNG
-- 🔄 自动降级机制
-- 🌐 代理支持 (自动使用 `http://localhost:1081`)
-- 📦 完全兼容 MCP 协议
-- 🎯 结构化搜索结果 (标题、链接、摘要)
+- 🔄 Automatic fallback mechanism
+- 🌐 Proxy support (automatically uses `http://localhost:1081`)
+- 📦 Fully compatible with MCP protocol
+- 🎯 Structured search results (title, link, snippet)
 
-## 📦 安装
+## 📦 Installation
 
 ```bash
 npm install
 npm run build
 ```
 
-## 🚀 使用方法
+## 🚀 Usage
 
-### 方案一：使用 SerpAPI（推荐）
+### Option 1: Use SerpAPI (Recommended)
 
-**为什么推荐 SerpAPI？**
-- ✅ 稳定可靠，无反爬虫问题
-- ✅ 免费层：100次搜索/月
-- ✅ 支持多个搜索引擎（Google、Bing、百度等）
-- ✅ 官方API，速度快
+**Why SerpAPI?**
+- ✅ Stable and reliable, no anti-scraping issues
+- ✅ Free tier: 100 searches/month
+- ✅ Supports multiple search engines (Google, Bing, Baidu, etc.)
+- ✅ Official API, fast response
 
-**获取 API 密钥：**
-1. 访问 https://serpapi.com/
-2. 注册免费账户
-3. 获取 API Key
+**Get API Key:**
+1. Visit https://serpapi.com/
+2. Register for a free account
+3. Get your API Key
 
-**配置：**
+**Configuration:**
 ```bash
-# 方式1: 使用 .env.local 文件（推荐）
+# Method 1: Use .env.local file (recommended)
 cp .env.example .env.local
-# 编辑 .env.local，填入你的 API Key
+# Edit .env.local, add your API Key
 # SERPAPI_KEY=your_api_key_here
 
-# 方式2: 使用环境变量
+# Method 2: Use environment variable
 export SERPAPI_KEY="your_api_key_here"
 ```
 
-**测试搜索：**
+**Test Search:**
 ```bash
-# 编译项目
+# Build the project
 npm run build
 
-# 运行测试（会自动读取 .env.local）
+# Run test (automatically reads .env.local)
 npm run dev
-# 或
+# or
 npx tsx src/test.ts
 ```
 
-### 方案二：使用开源引擎（可能遇到反爬虫）
+### Option 2: Use Open Source Engines (May Encounter Anti-Scraping)
 
-直接使用代码中实现的爬虫引擎，可能会遇到：
-- 503 错误
-- 验证码拦截
-- 超时问题
+Directly use the scraper engines implemented in the code, but may encounter:
+- 503 errors
+- CAPTCHA blocking
+- Timeout issues
 
-## 🔧 Claude Code 配置
+## 🔧 Claude Code Configuration
 
-配置 `.env.local` 后，在 Claude Code 配置文件中添加 MCP 服务器：
+After configuring `.env.local`, add MCP server to Claude Code configuration:
 
-**推荐配置（使用 .env.local）：**
+**Recommended Configuration (using .env.local):**
 ```json
 {
   "mcpServers": {
@@ -82,7 +82,7 @@ npx tsx src/test.ts
 }
 ```
 
-**或者在配置中指定环境变量：**
+**Or specify environment variables in config:**
 ```json
 {
   "mcpServers": {
@@ -97,88 +97,88 @@ npx tsx src/test.ts
 }
 ```
 
-> **提示：** 推荐使用 `.env.local` 文件管理密钥，更安全且便于管理。
+> **Tip:** Using `.env.local` file for key management is more secure and convenient.
 
-## 🛠️ 开发
+## 🛠️ Development
 
 ```bash
-# 开发模式运行
+# Development mode
 npm run dev
 
-# 编译
+# Build
 npm run build
 
-# 运行编译后的版本
+# Run built version
 npm start
 ```
 
-## 📖 搜索工具 API
+## 📖 Search Tool API
 
-MCP 服务器提供 `web_search` 工具，参数如下：
+The MCP server provides a `web_search` tool with the following parameters:
 
-- `query` (必需): 搜索查询字符串
-- `engine` (可选): 要使用的搜索引擎
-  - `auto` (默认): 自动尝试所有引擎并降级
-  - `serpapi`: 使用 SerpAPI (需要 SERPAPI_KEY)
-  - `baidu`: 仅使用百度
-  - `google`: 仅使用 Google
-  - `duckduckgo`: 仅使用 DuckDuckGo
-  - `searxng`: 仅使用 SearXNG
-- `max_results` (可选): 最大结果数 (1-50, 默认: 10)
-- `language` (可选): 语言偏好 (默认: "en")
+- `query` (required): Search query string
+- `engine` (optional): Search engine to use
+  - `auto` (default): Automatically try all engines with fallback
+  - `serpapi`: Use SerpAPI (requires SERPAPI_KEY)
+  - `baidu`: Use Baidu only
+  - `google`: Use Google only
+  - `duckduckgo`: Use DuckDuckGo only
+  - `searxng`: Use SearXNG only
+- `max_results` (optional): Maximum number of results (1-50, default: 10)
+- `language` (optional): Language preference (default: "en")
 
-## 💡 使用示例
+## 💡 Usage Examples
 
-在 Claude Code 中调用：
+Call in Claude Code:
 
 ```typescript
 web_search({
-  query: "今天黄金价格",
+  query: "gold price today",
   engine: "auto",
   max_results: 5
 })
 ```
 
-## 🌍 环境变量
+## 🌍 Environment Variables
 
-- `https_proxy` / `HTTPS_PROXY`: 代理服务器 URL (默认: http://localhost:1081)
-- `SERPAPI_KEY`: SerpAPI 密钥 (可选，但强烈推荐)
+- `https_proxy` / `HTTPS_PROXY`: Proxy server URL (default: http://localhost:1081)
+- `SERPAPI_KEY`: SerpAPI key (optional but highly recommended)
 
-## 📂 项目结构
+## 📂 Project Structure
 
 ```
 search-mcp/
 ├── src/
-│   ├── index.ts              # MCP 服务器入口
+│   ├── index.ts              # MCP server entry point
 │   ├── search/
-│   │   ├── base.ts           # 搜索引擎基类
-│   │   ├── serpapi.ts        # SerpAPI 实现 (推荐)
-│   │   ├── baidu.ts          # 百度搜索
-│   │   ├── google.ts         # Google 搜索
-│   │   ├── duckduckgo.ts     # DuckDuckGo 搜索
-│   │   ├── searxng.ts        # SearXNG 搜索
-│   │   └── manager.ts        # 搜索管理器 (降级逻辑)
+│   │   ├── base.ts           # Search engine base class
+│   │   ├── serpapi.ts        # SerpAPI implementation (recommended)
+│   │   ├── baidu.ts          # Baidu search
+│   │   ├── google.ts         # Google search
+│   │   ├── duckduckgo.ts     # DuckDuckGo search
+│   │   ├── searxng.ts        # SearXNG search
+│   │   └── manager.ts        # Search manager (fallback logic)
 │   └── utils/
-│       └── http.ts           # HTTP 客户端 (代理支持)
+│       └── http.ts           # HTTP client (proxy support)
 ├── package.json
 ├── tsconfig.json
-├── PLAN.md                    # 开发计划
-├── SOLUTION.md                # 问题解决方案
-└── README.md                  # 本文件
+├── PLAN.md                    # Development plan
+├── SOLUTION.md                # Problem solutions
+└── README.md                  # This file
 ```
 
-## ⚠️ 反爬虫问题说明
+## ⚠️ Anti-Scraping Issues
 
-由于主流搜索引擎（Google、Baidu、DuckDuckGo）都有严格的反爬虫措施，直接爬取可能遇到：
+Due to strict anti-scraping measures by major search engines (Google, Baidu, DuckDuckGo), direct scraping may encounter:
 - 503 Service Unavailable
-- 验证码拦截
-- IP 封禁
-- 请求超时
+- CAPTCHA blocking
+- IP bans
+- Request timeouts
 
-**强烈建议使用 SerpAPI**，它提供官方 API 接口，无需担心反爬虫问题。
+**Strongly recommend using SerpAPI**, which provides official API access without anti-scraping concerns.
 
-查看 `SOLUTION.md` 获取更多替代方案。
+See `SOLUTION.md` for alternative solutions.
 
-## 📝 许可证
+## 📝 License
 
 ISC

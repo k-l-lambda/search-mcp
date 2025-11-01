@@ -8,7 +8,7 @@ async function testSearch() {
   const manager = new SearchManager();
 
   // Test query
-  const query = '今天黄金价格';
+  const query = 'gold price today';
   console.log(`Search query: "${query}"\n`);
 
   try {

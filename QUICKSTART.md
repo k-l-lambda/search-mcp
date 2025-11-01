@@ -1,38 +1,38 @@
-# Search MCP - 快速开始
+# Search MCP - Quick Start Guide
 
-## 🚀 5分钟快速上手
+## 🚀 5-Minute Quick Start
 
-### 1. 选择方案
+### 1. Choose Your Approach
 
-#### 方案 A：使用 SerpAPI（推荐，最稳定）
+#### Option A: Use SerpAPI (Recommended, Most Stable)
 
-1. **注册 SerpAPI**
-   - 访问：https://serpapi.com/users/sign_up
-   - 免费注册账户
-   - 获取 API Key（免费100次/月）
+1. **Register for SerpAPI**
+   - Visit: https://serpapi.com/users/sign_up
+   - Create a free account
+   - Get API Key (100 free searches/month)
 
-2. **配置 API Key**
+2. **Configure API Key**
    ```bash
-   # 创建 .env.local 文件
+   # Create .env.local file
    cd /home/ubuntu/work/search-mcp
    cp .env.example .env.local
 
-   # 编辑 .env.local，填入你的 API Key
-   # SERPAPI_KEY=你的API密钥
+   # Edit .env.local, add your API Key
+   # SERPAPI_KEY=your_api_key
    ```
 
-   或者直接创建文件：
+   Or create the file directly:
    ```bash
-   echo "SERPAPI_KEY=你的API密钥" > .env.local
+   echo "SERPAPI_KEY=your_api_key" > .env.local
    ```
 
-3. **配置 Claude Code**
+3. **Configure Claude Code**
 
-   编辑配置文件（具体路径取决于你的系统）：
+   Edit configuration file (path depends on your system):
    - macOS/Linux: `~/.config/claude/config.json`
    - Windows: `%APPDATA%\claude\config.json`
 
-   添加以下内容：
+   Add the following content:
    ```json
    {
      "mcpServers": {
@@ -44,19 +44,19 @@
    }
    ```
 
-   > **提示：** API Key 已保存在 `.env.local` 中，无需在配置中重复指定！
+   > **Tip:** API Key is saved in `.env.local`, no need to specify it in config!
 
-4. **重启 Claude Code**
+4. **Restart Claude Code**
 
-5. **测试搜索**
-   在 Claude Code 中输入：
+5. **Test Search**
+   In Claude Code, type:
    ```
-   帮我搜索一下今天的黄金价格
+   Search for gold price today
    ```
 
-#### 方案 B：不使用 API（免费但不稳定）
+#### Option B: Without API (Free but Unstable)
 
-1. **配置 Claude Code**
+1. **Configure Claude Code**
    ```json
    {
      "mcpServers": {
@@ -71,88 +71,88 @@
    }
    ```
 
-2. **注意事项**
-   - 可能遇到反爬虫限制
-   - 成功率较低
-   - 不推荐用于生产环境
+2. **Notes**
+   - May encounter anti-scraping restrictions
+   - Lower success rate
+   - Not recommended for production use
 
-## 📋 检查清单
+## 📋 Checklist
 
-- [ ] 项目已编译（`npm run build`）
-- [ ] SerpAPI Key 已获取（方案A）
-- [ ] Claude Code 配置已更新
-- [ ] 代理服务器运行正常（http://localhost:1081）
-- [ ] Claude Code 已重启
-- [ ] 测试搜索功能
+- [ ] Project compiled (`npm run build`)
+- [ ] SerpAPI Key obtained (Option A)
+- [ ] Claude Code configuration updated
+- [ ] Proxy server running (http://localhost:1081)
+- [ ] Claude Code restarted
+- [ ] Search functionality tested
 
-## 🧪 测试命令
+## 🧪 Test Commands
 
-### 测试 1: 基础搜索
+### Test 1: Basic Search
 ```
-搜索今天的天气
-```
-
-### 测试 2: 中文搜索
-```
-搜索黄金价格最新消息
+Search for today's weather
 ```
 
-### 测试 3: 英文搜索
+### Test 2: Chinese Search
+```
+Search for latest gold price news
+```
+
+### Test 3: English Search
 ```
 Search for latest AI news
 ```
 
-### 测试 4: 指定引擎
+### Test 4: Specify Engine
 ```
-使用 serpapi 搜索 bitcoin price
+Use serpapi to search for bitcoin price
 ```
 
-## ❓ 常见问题
+## ❓ FAQ
 
-### Q: 搜索失败怎么办？
+### Q: What if search fails?
 A:
-1. 检查 SerpAPI Key 是否正确
-2. 确认代理服务器是否运行
-3. 查看 Claude Code 日志
-4. 尝试重启 Claude Code
+1. Check if SerpAPI Key is correct
+2. Verify proxy server is running
+3. Check Claude Code logs
+4. Try restarting Claude Code
 
-### Q: 免费额度用完了怎么办？
+### Q: What if free quota is exhausted?
 A:
-1. SerpAPI 免费层：100次/月
-2. 可以注册新账户
-3. 或升级到付费计划
-4. 或使用其他搜索引擎（不稳定）
+1. SerpAPI free tier: 100 searches/month
+2. Can register a new account
+3. Or upgrade to paid plan
+4. Or use other search engines (unstable)
 
-### Q: 如何查看详细日志？
-A: MCP 服务器的错误会输出到 Claude Code 的错误流，可以在 Claude Code 中查看。
+### Q: How to view detailed logs?
+A: MCP server errors output to Claude Code's error stream and can be viewed in Claude Code.
 
-### Q: 支持哪些搜索引擎？
+### Q: Which search engines are supported?
 A:
-- SerpAPI (推荐)
-- Google (不稳定)
-- Baidu (不稳定)
-- DuckDuckGo (不稳定)
-- SearXNG (不稳定)
+- SerpAPI (recommended)
+- Google (unstable)
+- Baidu (unstable)
+- DuckDuckGo (unstable)
+- SearXNG (unstable)
 
-## 📞 获取帮助
+## 📞 Get Help
 
-如果遇到问题：
-1. 查看 `README.md` 详细文档
-2. 查看 `SOLUTION.md` 解决方案
-3. 查看 `SUMMARY.md` 项目总结
+If you encounter issues:
+1. Check `README.md` for detailed documentation
+2. Check `SOLUTION.md` for solutions
+3. Check `SUMMARY.md` for project summary
 
-## 🎉 成功示例
+## 🎉 Success Example
 
-当配置成功后，你可以：
+When configured successfully, you can:
 
 ```
-用户：搜索今天黄金价格
+User: Search for gold price today
 
-Claude：我来帮你搜索今天的黄金价格。
+Claude: Let me search for today's gold price.
 
-[调用 web_search 工具]
+[Calls web_search tool]
 
-根据搜索结果，今天的黄金价格是...
+Based on the search results, today's gold price is...
 ```
 
-祝你使用愉快！🎊
+Enjoy using the search tool! 🎊

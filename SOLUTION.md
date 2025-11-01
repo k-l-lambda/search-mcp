@@ -1,77 +1,77 @@
-# Search MCP Server - 使用说明
+# Search MCP Server - Usage Guide
 
-## ⚠️ 重要说明
+## ⚠️ Important Notice
 
-由于主流搜索引擎（Google、Baidu、DuckDuckGo等）都有严格的反爬虫措施，直接爬取搜索结果会遇到以下问题：
-- 503 Service Unavailable 错误
-- 验证码拦截
-- IP封禁
-- 超时
+Due to strict anti-scraping measures by major search engines (Google, Baidu, DuckDuckGo, etc.), direct scraping of search results may encounter the following issues:
+- 503 Service Unavailable errors
+- CAPTCHA blocking
+- IP bans
+- Timeouts
 
-## 建议的解决方案
+## Recommended Solutions
 
-### 方案 1: 使用搜索 API（推荐）
+### Solution 1: Use Search APIs (Recommended)
 
-集成官方API服务，虽然需要API密钥，但稳定可靠：
+Integrate official API services. While API keys are required, they are stable and reliable:
 
 1. **SerpAPI** (https://serpapi.com/)
-   - 支持 Google, Bing, Baidu 等多个搜索引擎
-   - 免费层：100次/月
-   - 简单易用
+   - Supports multiple search engines including Google, Bing, Baidu
+   - Free tier: 100 searches/month
+   - Simple and easy to use
 
 2. **Bing Web Search API** (Microsoft Azure)
-   - 官方 API，稳定可靠
-   - 免费层：1000次/月
+   - Official API, stable and reliable
+   - Free tier: 1000 searches/month
 
 3. **Google Custom Search API**
-   - Google 官方 API
-   - 免费层：100次/天
+   - Official Google API
+   - Free tier: 100 searches/day
 
-### 方案 2: 使用 SearXNG 私有实例
+### Solution 2: Use Private SearXNG Instance
 
-部署自己的 SearXNG 实例（开源元搜索引擎）：
+Deploy your own SearXNG instance (open-source meta search engine):
 
 ```bash
 docker run -d -p 8888:8080 searxng/searxng
 ```
 
-然后修改配置使用本地实例：`http://localhost:8888`
+Then modify configuration to use local instance: `http://localhost:8888`
 
-### 方案 3: 使用浏览器自动化
+### Solution 3: Use Browser Automation
 
-使用 Puppeteer 或 Playwright 模拟真实浏览器行为，可以绕过大部分反爬虫：
+Use Puppeteer or Playwright to simulate real browser behavior, which can bypass most anti-scraping measures:
 
 ```bash
 npm install puppeteer
 ```
 
-## 当前实现
+## Current Implementation
 
-当前代码已实现以下搜索引擎的基础爬取功能：
+The current code implements basic scraping functionality for the following search engines:
 - ✅ Baidu
 - ✅ Google
 - ✅ DuckDuckGo
 - ✅ SearXNG
 
-但由于反爬虫限制，实际使用中可能会失败。
+However, due to anti-scraping restrictions, they may fail in actual use.
 
-## 如何启用 API 集成
+## How to Enable API Integration
 
-### 使用 SerpAPI 示例
+### SerpAPI Integration Example
 
 ```bash
-# 安装依赖
+# Install dependencies
 npm install serpapi
 
-# 设置环境变量
+# Set environment variable
 export SERPAPI_KEY="your_api_key_here"
 ```
 
-我可以帮你集成 SerpAPI 或其他 API 服务，只需提供 API 密钥即可。
+I can help you integrate SerpAPI or other API services - just provide the API key.
 
-## MCP 服务器配置
+## MCP Server Configuration
 
-当解决了搜索引擎访问问题后，在 Claude Code 配置中添加：
+After resolving search engine access issues, add to Claude Code configuration:
 
 ```json
 {
@@ -88,12 +88,12 @@ export SERPAPI_KEY="your_api_key_here"
 }
 ```
 
-## 下一步
+## Next Steps
 
-你希望我：
-1. 集成 SerpAPI（需要API密钥）
-2. 部署 SearXNG 私有实例
-3. 添加 Puppeteer 浏览器自动化
-4. 其他方案？
+Would you like me to:
+1. Integrate SerpAPI (requires API key)
+2. Deploy private SearXNG instance
+3. Add Puppeteer browser automation
+4. Other solutions?
 
-请告诉我你的选择！
+Please let me know your choice!
