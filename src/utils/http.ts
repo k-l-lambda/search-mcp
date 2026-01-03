@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 export interface HttpClientOptions {
   proxy?: string;
@@ -11,7 +12,7 @@ export class HttpClient {
 
   constructor(options: HttpClientOptions = {}) {
     const {
-      proxy = process.env.https_proxy || process.env.HTTPS_PROXY || 'http://localhost:1081',
+      proxy = process.env.https_proxy || process.env.HTTPS_PROXY || 'http://localhost:1091',
       timeout = 30000,
       userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     } = options;
@@ -25,16 +26,12 @@ export class HttpClient {
         'Accept-Encoding': 'gzip, deflate, br',
         'Connection': 'keep-alive',
       },
+      proxy: false,  // Disable axios built-in proxy
     };
 
-    // Configure proxy if provided
+    // Use https-proxy-agent for better HTTPS proxy support
     if (proxy) {
-      const proxyUrl = new URL(proxy);
-      config.proxy = {
-        host: proxyUrl.hostname,
-        port: parseInt(proxyUrl.port || '80'),
-        protocol: proxyUrl.protocol.replace(':', ''),
-      };
+      config.httpsAgent = new HttpsProxyAgent(proxy);
     }
 
     this.client = axios.create(config);

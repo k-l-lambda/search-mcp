@@ -1,5 +1,4 @@
 import { SearchEngine, SearchResult, SearchOptions } from './base.js';
-import { getJson } from 'serpapi';
 
 export class SerpAPISearch extends SearchEngine {
   private apiKey: string;
@@ -17,13 +16,17 @@ export class SerpAPISearch extends SearchEngine {
     const { maxResults = 10, language = 'en' } = options;
 
     try {
-      const response = await getJson({
+      const params = new URLSearchParams({
         engine: 'google',
         q: query,
         api_key: this.apiKey,
-        num: Math.min(maxResults, 100),
+        num: String(Math.min(maxResults, 100)),
         hl: language,
       });
+
+      const url = `https://serpapi.com/search.json?${params.toString()}`;
+      const text = await this.httpClient.get(url);
+      const response = JSON.parse(text);
 
       const results: SearchResult[] = [];
 
